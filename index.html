@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简易旅行攻略网</title>
+    <!-- 简化CSS：只用内部样式，去掉第三方框架 -->
+    <style>
+        /* 基础样式：统一页面风格 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "微软雅黑", sans-serif;
+        }
+        body {
+            color: #333;
+            line-height: 1.6;
+        }
+        a {
+            text-decoration: none;
+            color: #2196F3;
+        }
+        a:hover {
+            color: #1976D2;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+        button {
+            cursor: pointer;
+            border: none;
+            background: #2196F3;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 4px;
+        }
+        button:hover {
+            background: #1976D2;
+        }
+        h2 {
+            text-align: center;
+            margin: 30px 0;
+            font-size: 24px;
+        }
+
+        /* 导航栏样式 */
+        nav {
+            background: #2196F3;
+            color: white;
+            padding: 15px 0;
+        }
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-links a {
+            color: white;
+            margin-left: 20px;
+        }
+
+        /* 英雄区样式 */
+        .hero {
+            background: url(https://picsum.photos/id/1036/1200/400) no-repeat center;
+            background-size: cover;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        /* 目的地卡片样式 */
+        .destinations {
+            margin: 40px 0;
+        }
+        .card-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .card-content {
+            padding: 15px;
+        }
+        .card h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        .card p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        /* 旅行工具样式 */
+        .tools {
+            background: #f5f5f5;
+            padding: 40px 0;
+        }
+        .tool-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .tool-box h3 {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        .tool-box input, .tool-box select {
+            padding: 8px;
+            margin: 5px 0;
+            width: 180px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        #budget-result {
+            margin-top: 15px;
+            color: #2196F3;
+            font-weight: bold;
+        }
+
+        /* 页脚样式 */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 1. 导航栏：简单跳转链接 -->
+    <nav>
+        <div class="container nav-content">
+            <div class="logo">
+                <h1>简易旅行网</h1>
+            </div>
+            <div class="nav-links">
+                <a href="#destinations">目的地</a>
+                <a href="#tools">旅行工具</a>
+                <a href="#about">关于我们</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 2. 英雄区：展示网站主题 -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1>探索世界，记录美好</h1>
+            <p>为大学生提供简单、实用的旅行攻略</p>
+            <button onclick="alert('欢迎使用旅行网！')">开始探索</button>
+        </div>
+    </div>
+
+    <!-- 3. 目的地推荐：卡片展示 -->
+    <section id="destinations" class="destinations">
+        <div class="container">
+            <h2>热门旅行目的地</h2>
+            <div class="card-list">
+                <!-- 卡片1 -->
+                <div class="card">
+                    <img src="https://picsum.photos/id/1036/300/200" alt="丽江">
+                    <div class="card-content">
+                        <h3>丽江古城</h3>
+                        <p>云南经典目的地，感受纳西文化与慢生活</p>
+                        <button onclick="showDetail('丽江')">查看详情</button>
+                    </div>
+                </div>
+                <!-- 卡片2 -->
+                <div class="card">
+                    <img src="https://picsum.photos/id/1037/300/200" alt="成都">
+                    <div class="card-content">
+                        <h3>成都</h3>
+                        <p>吃火锅、看熊猫，体验川渝烟火气</p>
+                        <button onclick="showDetail('成都')">查看详情</button>
+                    </div>
+                </div>
+                <!-- 卡片3 -->
+                <div class="card">
+                    <img src="https://picsum.photos/id/1038/300/200" alt="青岛">
+                    <div class="card-content">
+                        <h3>青岛</h3>
+                        <p>看海、喝啤酒，打卡欧式建筑</p>
+                        <button onclick="showDetail('青岛')">查看详情</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. 旅行工具：简化版预算计算器 -->
+    <section id="tools" class="tools">
+        <div class="container">
+            <h2>旅行实用工具</h2>
+            <div class="tool-box">
+                <h3>旅行预算计算器（学生版）</h3>
+                <p>输入旅行天数和每日预算，计算总费用：</p>
+                <br>
+                <label>旅行天数：</label>
+                <input type="number" id="days" min="1" value="3">
+                <br>
+                <label>每日预算（元）：</label>
+                <input type="number" id="daily-cost" min="50" value="200">
+                <br>
+                <button onclick="calculateBudget()">计算总预算</button>
+                <div id="budget-result"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. 关于我们：简单介绍 -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>关于我们</h2>
+            <p>这是一个为大学生设计的简易旅行攻略网站，旨在帮助大家用更少的钱，玩得更开心。网站由Web初学者开发，代码简洁易懂，适合学习参考。</p>
+        </div>
+    </section>
+
+    <!-- 6. 页脚：版权信息 -->
+    <footer>
+        <p>© 2024 简易旅行网 - 大学生Web作业</p>
+    </footer>
+
+    <!-- 简化JavaScript：只保留核心交互 -->
+    <script>
+        // 1. 展示目的地详情
+        function showDetail(city) {
+            const info = {
+                丽江: "推荐游玩：古城、玉龙雪山、蓝月谷 | 学生门票优惠：玉龙雪山门票半价",
+                成都: "推荐游玩：大熊猫基地、宽窄巷子、锦里 | 美食推荐：火锅、串串香（人均50-80元）",
+                青岛: "推荐游玩：栈桥、八大关、五四广场 | 学生福利：海滨步道免费，啤酒博物馆学生票优惠"
+            };
+            alert(`${city}旅行小贴士：\n${info[city]}`);
+        }
+
+        // 2. 计算旅行预算
+        function calculateBudget() {
+            const days = document.getElementById("days").value;
+            const dailyCost = document.getElementById("daily-cost").value;
+            const total = days * dailyCost;
+            // 显示结果（加学生优惠提示）
+            document.getElementById("budget-result").innerText = 
+                `总预算：${total} 元（学生党建议多带20%备用金哦！）`;
+        }
+    </script>
+</body>
+</html>
